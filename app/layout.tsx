@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Quicksand, Pacifico } from "next/font/google";
 import "./globals.css";
+import clsx from "clsx";
+import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const quicksand = Quicksand({ subsets: ["latin"] });
+export const pacifico = Pacifico({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={clsx(quicksand.className, "w-screens h-screen")}>
+        <Toaster position="top-center" />
+        {children}
+      </body>
     </html>
   );
 }
