@@ -1,6 +1,5 @@
 import InputContainer from "@/components/InputContainer";
 import clsx from "clsx";
-import { pacifico } from "./layout";
 import Image from "next/image";
 
 export default function Home() {

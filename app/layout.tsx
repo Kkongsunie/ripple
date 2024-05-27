@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Quicksand, Pacifico } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
 import { Toaster } from "react-hot-toast";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
-export const pacifico = Pacifico({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
