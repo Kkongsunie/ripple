@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(quicksand.className, "w-screens h-screen")}>
+        <link rel="icon" href="/images/icon.ico" sizes="any" />
         <Toaster position="top-center" />
         {children}
       </body>
