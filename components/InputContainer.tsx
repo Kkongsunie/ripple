@@ -101,10 +101,10 @@ const InputContainer = () => {
           {...register("salutation")}
           placeholder={
             errors.salutation
-              ? errors.salutation.message // Show error message as placeholder
+              ? errors.salutation.message
               : 'Enter a Salutation like "Dear Aiah" or "To my friend"'
           }
-          className={`mb-4 w-full border-b border-gray-300 p-2 text-h4 font-medium focus:outline-none ${
+          className={`mb-4 w-full border-b border-gray-300 p-2 text-h5 font-medium focus:outline-none ${
             errors.salutation ? "border-red-500" : ""
           }`}
         />
