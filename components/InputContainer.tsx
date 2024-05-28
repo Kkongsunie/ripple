@@ -75,19 +75,24 @@ const InputContainer = () => {
     const promise = axios.post("/api/encrypt", data);
 
     toast.promise(promise, {
-      loading: "Encrypting Data...",
+      loading: "Sending a ripple in time...",
       success: "Success",
       error: (error) => {
         console.log("Login Error:", error);
-        const errorMessage = error.respone?.data?.error || "Failed to Encrypt";
-        reset();
+        const errorMessage = error.response?.data?.error || "Failed to Encrypt";
         console.log(errorMessage);
         return errorMessage;
       },
     });
 
-    const response = await promise;
-    console.log(response);
+    try {
+      const response = await promise;
+      console.log(response);
+      // Reset the form after successful submission
+      reset();
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   return (
@@ -220,7 +225,7 @@ const InputContainer = () => {
             type="submit"
             className="rounded-md border-[5px] border-white bg-[#007FFF] px-[32px] py-[16px] text-h6  font-semibold text-white transition hover:border-[#007FFF] hover:bg-white hover:text-black"
           >
-            Send a ripple in time
+            Send it!
           </button>
         </div>
       </div>
