@@ -40,14 +40,20 @@ export async function POST(request: NextRequest) {
     const key = "ripple";
 
     // Decrypt the message (assuming it's in base64 format)
-    const decryptedBytes = xorCipher(message, key, true);
-    const decryptedMessage = new TextDecoder().decode(decryptedBytes);
+    const decryptedSalutationByes = xorCipher(message, key, true);
+    const decryptedSalutation = new TextDecoder().decode(
+      decryptedSalutationByes,
+    );
+    // Decrypt the message (assuming it's in base64 format)
+    const decryptedMessageBytes = xorCipher(message, key, true);
+    const decryptedMessage = new TextDecoder().decode(decryptedMessageBytes);
 
     console.log("Encrypted Base64:", message);
     console.log("Decrypted Message:", decryptedMessage);
 
     return NextResponse.json({
       decryptedMessage,
+      decryptedSalutation,
       success: true,
     });
   } catch (error) {

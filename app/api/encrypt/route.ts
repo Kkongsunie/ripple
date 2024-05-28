@@ -1,4 +1,6 @@
+import Message from "@/lib/models/Message";
 import { dbConnect } from "@/lib/server/dbConnect";
+import { MessageSchemaType } from "@/lib/types/messageValidation";
 import { NextRequest, NextResponse } from "next/server";
 
 function xorCipher(text: string, key: string): Uint8Array {
@@ -25,17 +27,39 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   try {
     const body = await request.json();
-    const { message } = body;
+    const { message, salutation, email, year, day, month } =
+      body as MessageSchemaType;
     const key = "ripple";
 
-    // Encrypt the message
-    const encryptedBytes = xorCipher(message, key);
-    const encryptedBase64 = Buffer.from(encryptedBytes).toString("base64");
+    // Encrypt the salutation
+    const encryptedSalutationBytes = xorCipher(salutation, key);
+    const encryptedSalutationBase64 = Buffer.from(
+      encryptedSalutationBytes,
+    ).toString("base64");
 
-    console.log("Encrypted Base64:", encryptedBase64);
+    // Encrypt the message
+    const encryptedMessageBytes = xorCipher(message, key);
+    const encryptedMessageBase64 = Buffer.from(encryptedMessageBytes).toString(
+      "base64",
+    );
+
+    // Create a new message document
+    const newMessage = await Message.create({
+      salutation: encryptedSalutationBase64,
+      message: encryptedMessageBase64,
+      email,
+      year,
+      month,
+      day,
+    });
+
+    console.log("New Message:", newMessage);
+
+    console.log("Encrypted Message Base64:", encryptedMessageBase64);
 
     return NextResponse.json({
-      encryptedBase64,
+      encryptedMessageBase64,
+      encryptedSalutationBase64,
       success: true,
     });
   } catch (error) {

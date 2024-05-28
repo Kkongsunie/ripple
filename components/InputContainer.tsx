@@ -72,11 +72,7 @@ const InputContainer = () => {
   ) => {
     console.log(data);
 
-    const body = {
-      message: data.message,
-    };
-
-    const promise = axios.post("/api/encrypt", body);
+    const promise = axios.post("/api/encrypt", data);
 
     toast.promise(promise, {
       loading: "Encrypting Data...",
