@@ -34,6 +34,8 @@ async function sendEmail({
     headers: {
       "X-Priority": "3",
       "X-Mailer": "NodeMailer",
+      "List-Unsubscribe": `<mailto:unsubscribe@yourdomain.com?subject=unsubscribe>`,
+      Precedence: "bulk",
     },
   };
 

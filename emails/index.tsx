@@ -28,7 +28,7 @@ export const FutureMessage = ({
   salutation,
   message,
 }: FutureMessageProps) => {
-  const previewText = `Read ${authorName}'s review`;
+  const previewText = `Someone just sent you a message from the past, take your time to read it :)`;
 
   return (
     <Html>
