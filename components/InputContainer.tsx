@@ -107,7 +107,7 @@ const InputContainer = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex h-full w-full items-center justify-center"
+      className="flex h-full w-[80%] items-center justify-center"
     >
       <div className="flex h-[94%] w-[1200px] flex-col gap-[8px] rounded-xl border bg-white p-[32px] shadow-card">
         <input

@@ -5,13 +5,17 @@ export default function Home() {
   return (
     <main className="flex h-full w-full flex-col">
       <div className="flex h-[300px] flex-grow-0 flex-col items-center justify-center gap-[16px]">
-        <Image src={"/logo.png"} alt="logo" height={450} width={450} />
-        {/* <h1 className={clsx(pacifico.className, "text-[10rem]")}>Ripple</h1>
-        <p className="text-[1.5rem] font-semibold">
-          Your message, a ripple in time
-        </p> */}
+        <div className="flex h-[300px] w-[300px] items-center lg:h-[400px] lg:w-[400px]">
+          <Image
+            src={"/logo.png"}
+            alt="logo"
+            height={180}
+            width={180}
+            layout="responsive"
+          />
+        </div>
       </div>
-      <div className="flex-grow ">
+      <div className="flex flex-grow items-center justify-center ">
         <InputContainer />
       </div>
     </main>
