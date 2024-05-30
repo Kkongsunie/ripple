@@ -25,6 +25,9 @@ const months = [
 ];
 
 const InputContainer = () => {
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1; // Adding 1 because month is zero-based
@@ -88,8 +91,15 @@ const InputContainer = () => {
     try {
       const response = await promise;
       console.log(response);
-      // Reset the form after successful submission
-      reset();
+      reset({
+        salutation: "",
+        message: "",
+        email: "",
+        year: data.year,
+        month: data.month,
+        day: data.day
+      });
+      setIsLoading(false);
     } catch (error) {
       console.error("Submission error:", error);
     }
@@ -224,8 +234,9 @@ const InputContainer = () => {
           <button
             type="submit"
             className="rounded-md border-[5px] border-white bg-[#007FFF] px-[32px] py-[16px] text-h6  font-semibold text-white transition hover:border-[#007FFF] hover:bg-white hover:text-black"
+            disabled={isLoading} // Disable button while loading
           >
-            Send it!
+            {isLoading ? "Sending..." : "Send it!"}
           </button>
         </div>
       </div>
