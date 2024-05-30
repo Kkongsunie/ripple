@@ -128,7 +128,7 @@ const InputContainer = () => {
 
         <div className="flex flex-col gap-[8px]">
           <div className="flex gap-[32px]">
-            <h4 className="text-p">Choose a Date</h4>
+            <h4 className="text-p">Choose a date to send the message</h4>
           </div>
           <div className="flex gap-[8px]">
             {/* Month dropdown */}

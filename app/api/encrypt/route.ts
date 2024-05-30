@@ -3,7 +3,9 @@ import { dbConnect } from "@/lib/server/dbConnect";
 import { MessageSchemaType } from "@/lib/types/messageValidation";
 import { NextRequest, NextResponse } from "next/server";
 
-function xorCipher(text: string, key: string): Uint8Array {
+function xorCipher(text: string): Uint8Array {
+  const key = "ripple";
+
   // Convert text and key to Uint8Array
   const textBytes = new TextEncoder().encode(text);
   const keyBytes = new TextEncoder().encode(key);
@@ -29,37 +31,41 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { message, salutation, email, year, day, month } =
       body as MessageSchemaType;
-    const key = "ripple";
 
-    // Encrypt the salutation
-    const encryptedSalutationBytes = xorCipher(salutation, key);
+    // Encrypting the salutation
+    const encryptedSalutationBytes = xorCipher(salutation);
     const encryptedSalutationBase64 = Buffer.from(
       encryptedSalutationBytes,
     ).toString("base64");
 
-    // Encrypt the message
-    const encryptedMessageBytes = xorCipher(message, key);
+    // Encrypting the message
+    const encryptedMessageBytes = xorCipher(message);
     const encryptedMessageBase64 = Buffer.from(encryptedMessageBytes).toString(
       "base64",
     );
 
-    // Create a new message document
+    // Encrypting the email
+    const encryptedEmailBytes = xorCipher(email);
+    const encryptedEmailBase64 =
+      Buffer.from(encryptedEmailBytes).toString("base64");
+
+    // Saving Data to database
     const newMessage = await Message.create({
       salutation: encryptedSalutationBase64,
       message: encryptedMessageBase64,
-      email,
+      email: encryptedEmailBase64,
       year,
       month,
       day,
+      status: "waiting",
     });
 
     console.log("New Message:", newMessage);
 
-    console.log("Encrypted Message Base64:", encryptedMessageBase64);
-
     return NextResponse.json({
       encryptedMessageBase64,
       encryptedSalutationBase64,
+      encryptedEmailBase64,
       success: true,
     });
   } catch (error) {
