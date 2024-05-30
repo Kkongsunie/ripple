@@ -29,7 +29,7 @@ async function sendEmail({
   const mailOptions = {
     from: `<${process.env.EMAIL_USER!}>`,
     to: email,
-    subject: "Your Message from the future has arrived.",
+    subject: "A Message from the future has arrived.",
     html: render(FutureMessage({ message, salutation })),
     headers: {
       "X-Priority": "3",
