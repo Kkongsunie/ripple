@@ -25,15 +25,13 @@ const months = [
 ];
 
 const InputContainer = () => {
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1; // Adding 1 because month is zero-based
+  const currentMonth = currentDate.getMonth() + 1;
   const currentDay = currentDate.getDate() + 1;
 
-  // State for selected year and month
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [selectedMonth, setSelectedMonth] = useState<number>(currentMonth);
   const [selectedDay, setSelectedDay] = useState<number>(currentDay);
@@ -41,19 +39,19 @@ const InputContainer = () => {
   const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const year = parseInt(e.target.value);
     setSelectedYear(year);
-    setValue("year", year.toString()); // Convert back to string for form value
+    setValue("year", year.toString());
   };
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const month = parseInt(e.target.value);
     setSelectedMonth(month);
-    setValue("month", month.toString()); // Convert back to string for form value
+    setValue("month", month.toString());
   };
 
   const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const day = parseInt(e.target.value);
     setSelectedDay(day);
-    setValue("day", day.toString()); // Convert back to string for form value
+    setValue("day", day.toString());
   };
 
   const {
@@ -61,7 +59,7 @@ const InputContainer = () => {
     handleSubmit,
     reset,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<MessageSchemaType>({ resolver: zodResolver(messageSchemaZod) });
 
   useEffect(() => {
@@ -246,7 +244,6 @@ const InputContainer = () => {
   );
 };
 
-// Function to get the number of days in a month
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month, 0).getDate();
 }
