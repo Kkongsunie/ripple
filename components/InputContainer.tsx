@@ -73,6 +73,7 @@ const InputContainer = () => {
   const onSubmit: SubmitHandler<MessageSchemaType> = async (
     data: MessageSchemaType,
   ) => {
+    setIsLoading(true);
     console.log(data);
 
     const promise = axios.post("/api/encrypt", data);
@@ -97,7 +98,7 @@ const InputContainer = () => {
         email: "",
         year: data.year,
         month: data.month,
-        day: data.day
+        day: data.day,
       });
       setIsLoading(false);
     } catch (error) {
@@ -233,8 +234,9 @@ const InputContainer = () => {
         <div className="flex h-[100px] items-center justify-center">
           <button
             type="submit"
-            className="rounded-md border-[5px] border-white bg-[#007FFF] px-[32px] py-[16px] text-h6  font-semibold text-white transition hover:border-[#007FFF] hover:bg-white hover:text-black"
-            disabled={isLoading} // Disable button while loading
+            className={`rounded-md border-[5px] border-white bg-[#007FFF] px-[32px] py-[16px] text-h6 font-semibold text-white transition 
+    ${isLoading ? "cursor-not-allowed bg-[#007FFF]" : "hover:border-[#007FFF] hover:bg-white hover:text-black"}`}
+            disabled={isLoading}
           >
             {isLoading ? "Sending..." : "Send it!"}
           </button>
